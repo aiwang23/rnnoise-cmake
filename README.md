@@ -1,38 +1,43 @@
 # rnnoise-cmake
 
-这是 [rnnoise](https://github.com/xiph/rnnoise) 的 CMake 包装项目，支持在 Windows（MSVC、MinGW）和 Linux 上构建，无需更改原始代码。
+[English](./README.md) | [中文](./README_ZH.md)
 
-> ⚠️ 使用前请先下载模型文件到 `data/` 文件夹中（见下文）。
+This is a CMake wrapper project for [rnnoise](https://github.com/xiph/rnnoise) that supports building on Windows (MSVC,
+MinGW) and Linux without changing the original code.
 
-## ✅ 项目结构
+> ⚠️ Please download the model file to the 'data/' folder before using it (see below).
 
- ```
+## ✅ Project Structure
+
+```
  .
- |-> README.md              # 本文档
- |-> CMakeLists.txt         # 根目录构建脚本
- |-> msvc_include#          # 为 MSVC 提供的兼容头文件
- |-> rnnoise                # 原始 rnnoise 源码
- +-> data                   # 存放模型数据文件
+ |-> README.md # This document
+ |-> CMakeLists.txt # Root build script
+ |-> msvc_include# # Compatible header files provided for MSVC
+ |-> rnnoise # Original rnnoise source code
+ +-> data # Hold the model data file
      |-> rnnoise_data.c
      |-> rnnoise_data.h
      |-> rnnoise_data_little.c
      +-> rnnoise_data_little.h
      
- ```
+```
 
-## ✅ 使用说明
+## ✅ Instructions for use
 
-### 1. 克隆项目
+### 1. Clone the project
 
 ```bash
 git clone --recursive https://www.github.com/aiwang23/rnnoise-cmake.git
 ```
 
-### 2. 下载模型
+### 2. Download the model
 
-从官方地址[https://media.xiph.org/rnnoise/models](https://media.xiph.org/rnnoise/models)下载模型,并解压到data/ 目录
+Download the model from the official
+address [https://media.xiph.org/rnnoise/models] (https://media.xiph.org/rnnoise/models) and extract it to the data/
+directory
 
-最终应包含:
+It should ultimately include:
 
 ```
 data
@@ -42,32 +47,43 @@ data
 +-> rnnoise_data_little.h
 ```
 
-### 3. 编译
+### 3. compile
 
 ```bash
 cmake -S . -B build
 cmake --build build
 ```
 
-## 🔧 如何在你的项目中使用
+## 🔧 How to use it in your project
 
 ```cmake
 add_subdirectory(rnnoise-cmake)
 target_link_libraries(your_target PRIVATE rnnoise)
 ```
 
-## ✨ 特性
+## 📥 Enter the requirements
 
-- ✅ 跨平台构建（Windows / Linux）
-- ✅ CMake 静态库封装
-- ✅ 非侵入式包装 rnnoise 原始项目
-- ✅ 支持 MSVC 编译器的兼容性处理
-- ✅ 模型 .model 文件转 .c/.h 文件嵌入
+⚠️ Before using RNNoise, make sure that the input audio matches the following formats, otherwise it may cause abnormal
+noise cancellation or even crash:
+
+- Sample rate: 48kHz (48000Hz)
+- Number of Channels: Mono
+- Bit depth: 16-bit integer (s16, i.e. int16_t)
+
+If you are using other audio formats (e.g., 44.1kHz, stereo, float, etc.), use an audio processing library (e.g.,
+FFmpeg, SoX, or libsamplerate) for pre-processing conversion first.
+
+## ✨ Features
+
+- ✅ Cross-platform build (Windows/Linux)
+- ✅ CMake static library encapsulation
+- ✅ Non-intrusive packaging of rnnoise original items
+- ✅ Support MSVC compiler compatibility handling
 
 ## 📃 License
 
-This project is a non-invasive CMake wrapper for [rnnoise](https://github.com/xiph/rnnoise), which is licensed under the
-BSD 3-Clause License.  
-The wrapper itself was created by [aiwang23](https://github.com/aiwang23) (爱喝水的小汪), 2025.
+This project is a CMake wrapper for [rnnoise](https://github.com/xiph/rnnoise) and the original project is licensed
+under the BSD 3-Clause License.
+This package was created by aiwang23 in 2025 and is also released under the BSD 3-Clause License.
 
-See [LICENSE](./LICENSE) for details.
+FOR MORE INFORMATION, PLEASE REFER TO [LICENSE](./LICENSE)

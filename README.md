@@ -66,5 +66,8 @@ target_link_libraries(your_target PRIVATE rnnoise)
 
 ## 📃 License
 
-本项目基于原始 rnnoise 项目，并遵循其 BSD-style License
+This project is a non-invasive CMake wrapper for [rnnoise](https://github.com/xiph/rnnoise), which is licensed under the
+BSD 3-Clause License.  
+The wrapper itself was created by [aiwang23](https://github.com/aiwang23) (爱喝水的小汪), 2025.
 
+See [LICENSE](./LICENSE) for details.
